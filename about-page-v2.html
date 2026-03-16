@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIMINAL CONTAINMENT — ABOUT</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#000;color:#fff;font-family:'VT323',monospace;min-height:100vh;}
+
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:99;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,0.4) 0px,rgba(0,0,0,0.4) 1px,transparent 1px,transparent 3px);
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:98;
+  background:repeating-linear-gradient(0deg,rgba(255,0,0,0.02) 0px,rgba(255,0,0,0) 1px,rgba(0,255,0,0.015) 2px,rgba(0,0,255,0.02) 4px);
+}
+
+#track{position:fixed;left:0;right:0;height:2px;z-index:97;pointer-events:none;
+background:linear-gradient(to right,transparent,rgba(255,255,255,0.06),transparent);
+animation:track 5s linear infinite;}
+@keyframes track{from{top:-2px;}to{top:100vh;}}
+
+.nb{position:fixed;left:0;right:0;height:2px;pointer-events:none;z-index:5;background:rgba(255,255,255,0.05);animation:nb 11s infinite;}
+.nb:nth-child(2){animation-delay:-4s;animation-duration:8s;}
+@keyframes nb{0%,100%{top:-4px;opacity:0;}15%{top:40%;opacity:1;}16%{top:42%;opacity:0.4;height:6px;}17%{top:-4px;opacity:0;}}
+
+#rec{position:fixed;top:18px;right:24px;z-index:20;display:flex;align-items:center;gap:7px;font-size:20px;letter-spacing:0.1em;animation:recblink 1.5s infinite;}
+#recdot{width:9px;height:9px;border-radius:50%;background:#ff2020;}
+@keyframes recblink{0%,100%{opacity:1;}50%{opacity:0.15;}}
+
+#tape{position:fixed;top:18px;left:24px;z-index:20;font-size:14px;letter-spacing:0.08em;color:rgba(255,255,255,0.3);line-height:1.5;}
+#ts{position:fixed;bottom:20px;right:24px;z-index:20;font-size:16px;letter-spacing:0.05em;color:rgba(255,255,255,0.4);}
+
+#wrapper{max-width:860px;margin:0 auto;padding:90px 40px 80px;}
+
+/* Header */
+#header{margin-bottom:52px;border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:32px;}
+#header-eye{font-size:14px;letter-spacing:0.2em;color:rgba(255,255,255,0.3);margin-bottom:10px;}
+#header-title{
+  font-size:clamp(52px,8vw,96px);line-height:0.88;color:#fff;
+  letter-spacing:0.02em;margin-bottom:14px;
+  text-shadow:3px 0 rgba(255,0,0,0.4),-2px 0 rgba(0,200,255,0.3);
+  animation:glitch 10s infinite;
+}
+@keyframes glitch{
+  0%,88%,100%{text-shadow:3px 0 rgba(255,0,0,0.4),-2px 0 rgba(0,200,255,0.3);}
+  90%{text-shadow:8px 0 rgba(255,0,0,0.6),-5px 0 rgba(0,200,255,0.5);transform:translate(-1px,0);}
+  92%{text-shadow:-3px 0 rgba(255,0,0,0.4),2px 0 rgba(0,200,255,0.3);transform:translate(1px,0);}
+  94%{text-shadow:3px 0 rgba(255,0,0,0.4),-2px 0 rgba(0,200,255,0.3);transform:none;}
+}
+#header-sub{font-size:15px;letter-spacing:0.15em;color:rgba(255,255,255,0.2);}
+
+/* Sections */
+.section{margin-bottom:44px;}
+.section-label{font-size:15px;letter-spacing:0.25em;color:rgba(255,255,255,0.3);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.05);}
+.section-text{font-size:18px;letter-spacing:0.06em;color:rgba(255,255,255,0.35);line-height:1.8;}
+.section-text p{margin-bottom:12px;}
+
+/* ── TEAM DROPDOWNS ── */
+#team-list{ display:flex; flex-direction:column; gap:2px; }
+
+.team-dropdown {
+  border: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.team-dropdown.open { border-color: rgba(255,255,255,0.15); }
+
+.team-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+  user-select: none;
+}
+.team-header:hover { background: rgba(255,255,255,0.03); }
+.team-dropdown.open .team-header { background: rgba(255,255,255,0.04); }
+
+.team-role-label {
+  font-size: 18px;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.4);
+  transition: color 0.2s;
+}
+.team-dropdown.open .team-role-label { color: #fff; }
+.team-header:hover .team-role-label { color: rgba(255,255,255,0.7); }
+
+.team-count {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.18);
+}
+
+.team-arrow {
+  font-size: 16px;
+  color: rgba(255,255,255,0.2);
+  transition: transform 0.3s, color 0.2s;
+  margin-left: 14px;
+}
+.team-dropdown.open .team-arrow {
+  transform: rotate(180deg);
+  color: rgba(255,255,255,0.5);
+}
+
+/* The collapsible body */
+.team-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  background: rgba(255,255,255,0.015);
+}
+.team-dropdown.open .team-body { max-height: 400px; }
+
+.team-member {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 20px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  font-size: 16px;
+  letter-spacing: 0.1em;
+}
+.member-name { color: rgba(255,255,255,0.55); }
+.member-role-detail { font-size: 13px; letter-spacing: 0.08em; color: rgba(255,255,255,0.18); }
+
+/* Links */
+.link-row{display:flex;flex-wrap:wrap;gap:14px;padding:12px 0;}
+.link-item{font-size:16px;letter-spacing:0.18em;color:rgba(255,255,255,0.5);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.12);padding-bottom:2px;transition:color 0.2s;}
+.link-item:hover{color:#fff;}
+
+.redacted{display:inline-block;background:rgba(255,255,255,0.25);color:transparent;user-select:none;padding:0 3px;}
+
+#footer{margin-top:60px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-between;font-size:14px;letter-spacing:0.15em;color:rgba(255,255,255,0.15);}
+
+#back{position:fixed;bottom:28px;left:40px;font-size:16px;letter-spacing:0.22em;color:rgba(255,255,255,0.35);text-decoration:none;border:1px solid rgba(255,255,255,0.08);padding:7px 18px;transition:color 0.2s;background:rgba(0,0,0,0.8);}
+#back:hover{color:#fff;}
+</style>
+</head>
+<body>
+<div class="nb"></div>
+<div class="nb"></div>
+<div id="track"></div>
+<div id="rec"><div id="recdot"></div>REC</div>
+<div id="tape">TAPE: LC-ABOUT<br>SITE-██ · INFO FILE</div>
+<div id="ts">00:00:00:00</div>
+
+<div id="wrapper">
+  <div id="header">
+    <div id="header-eye">SECURITY FOOTAGE · INFORMATION FILE · CAM-INFO</div>
+    <div id="header-title">LIMINAL<br>CONTAINMENT</div>
+    <div id="header-sub">SCP FOUNDATION × BACKROOMS · SURVIVAL HORROR · BUILD 0.1.0</div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="section">
+    <div class="section-label">// ABOUT THE GAME</div>
+    <div class="section-text">
+      <p>LIMINAL CONTAINMENT is an independent survival horror game set at the intersection of SCP Foundation lore and Backrooms anomalous space theory.</p>
+      <p>You play as D-XXXX — a D-Class subject assigned to an observational programme of unspecified duration. Equipped with a scanner, a camera, and very little else, you are sent into a clipping site from which no MTF unit has returned.</p>
+      <p>Keep the camera running. Keep moving.</p>
+    </div>
+  </div>
+
+  <!-- TEAM DROPDOWNS -->
+  <div class="section">
+    <div class="section-label">// THE TEAM</div>
+    <div id="team-list">
+
+      <div class="team-dropdown" id="drop-dev">
+        <div class="team-header" onclick="toggle('drop-dev')">
+          <span class="team-role-label">DEVELOPMENT</span>
+          <span style="display:flex;align-items:center;gap:10px;">
+            <span class="team-count">ADD NAMES</span>
+            <span class="team-arrow">▼</span>
+          </span>
+        </div>
+        <div class="team-body">
+          <!-- ADD YOUR DEVELOPERS HERE -->
+          <div class="team-member"><span class="member-name">YOUR NAME</span><span class="member-role-detail">LEAD DEV</span></div>
+          <div class="team-member"><span class="member-name">YOUR NAME</span><span class="member-role-detail">UNITY / C#</span></div>
+        </div>
+      </div>
+
+      <div class="team-dropdown" id="drop-sound">
+        <div class="team-header" onclick="toggle('drop-sound')">
+          <span class="team-role-label">SOUND & MUSIC</span>
+          <span style="display:flex;align-items:center;gap:10px;">
+            <span class="team-count">ADD NAMES</span>
+            <span class="team-arrow">▼</span>
+          </span>
+        </div>
+        <div class="team-body">
+          <!-- ADD YOUR SOUND PEOPLE HERE -->
+          <div class="team-member"><span class="member-name">YOUR NAME</span><span class="member-role-detail">SOUND DESIGN</span></div>
+          <div class="team-member"><span class="member-name">YOUR NAME</span><span class="member-role-detail">MUSIC / SCORE</span></div>
+        </div>
+      </div>
+
+      <div class="team-dropdown" id="drop-art">
+        <div class="team-header" onclick="toggle('drop-art')">
+          <span class="team-role-label">ART & MODELS</span>
+          <span style="display:flex;align-items:center;gap:10px;">
+            <span class="team-count">ADD NAMES</span>
+            <span class="team-arrow">▼</span>
+          </span>
+        </div>
+        <div class="team-body">
+          <!-- ADD YOUR ARTISTS HERE -->
+          <div class="team-member"><span class="member-name">YOUR NAME</span><span class="member-role-detail">3D MODELLING</span></div>
+          <div class="team-member"><span class="member-name">YOUR NAME</span><span class="member-role-detail">TEXTURES / UI</span></div>
+        </div>
+      </div>
+
+      <div class="team-dropdown" id="drop-narrative">
+        <div class="team-header" onclick="toggle('drop-narrative')">
+          <span class="team-role-label">NARRATIVE & WRITING</span>
+          <span style="display:flex;align-items:center;gap:10px;">
+            <span class="team-count">ADD NAMES</span>
+            <span class="team-arrow">▼</span>
+          </span>
+        </div>
+        <div class="team-body">
+          <!-- ADD YOUR WRITERS HERE -->
+          <div class="team-member"><span class="member-name">YOUR NAME</span><span class="member-role-detail">STORY / LORE</span></div>
+          <div class="team-member"><span class="member-name">YOUR NAME</span><span class="member-role-detail">DIALOGUE</span></div>
+        </div>
+      </div>
+
+      <div class="team-dropdown" id="drop-special">
+        <div class="team-header" onclick="toggle('drop-special')">
+          <span class="team-role-label">SPECIAL THANKS</span>
+          <span style="display:flex;align-items:center;gap:10px;">
+            <span class="team-count">ADD NAMES</span>
+            <span class="team-arrow">▼</span>
+          </span>
+        </div>
+        <div class="team-body">
+          <!-- ADD SPECIAL THANKS HERE -->
+          <div class="team-member"><span class="member-name">YOUR NAME</span><span class="member-role-detail">PLAYTESTING</span></div>
+          <div class="team-member"><span class="member-name">SCP WIKI COMMUNITY</span><span class="member-role-detail">INSPIRATION</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LINKS -->
+  <div class="section">
+    <div class="section-label">// LINKS</div>
+    <div class="link-row">
+      <a href="#" class="link-item" target="_blank">[ ITCH.IO PAGE → ]</a>
+      <a href="#" class="link-item" target="_blank">[ DISCORD → ]</a>
+      <a href="#" class="link-item" target="_blank">[ REPORT A BUG → ]</a>
+    </div>
+  </div>
+
+  <!-- LEGAL -->
+  <div class="section">
+    <div class="section-label">// LEGAL</div>
+    <div class="section-text">
+      <p>Fan project inspired by the SCP Foundation (scp-wiki.net, CC BY-SA 3.0) and the Backrooms creepypasta. All SCP content belongs to their respective authors.</p>
+      <p>3D models used under their respective Sketchfab licenses. All other content © <span class="redacted">████████</span> ████.</p>
+    </div>
+  </div>
+
+  <div id="footer">
+    <span>LIMINAL CONTAINMENT · BUILD 0.1.0-ALPHA</span>
+    <span>ALL RIGHTS RESERVED</span>
+  </div>
+</div>
+
+<a id="back" href="javascript:history.back()">[ ← BACK ]</a>
+
+<script>
+// Timestamp
+let f=0;
+function tick(){
+  f++;
+  const s=Math.floor(f/30)%60,m=Math.floor(f/1800)%60,h=Math.floor(f/108000),fr=f%30;
+  document.getElementById('ts').textContent=
+    String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+
+    String(s).padStart(2,'0')+':'+String(fr).padStart(2,'0');
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+
+// Dropdown toggle
+function toggle(id){
+  const el=document.getElementById(id);
+  el.classList.toggle('open');
+}
+</script>
+</body>
+</html>
